@@ -1,6 +1,10 @@
 package com.lcrojano.trayectoria_gps_lcrojano;
 
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import com.example.trayectoria_gps_lcrojano.R;
 
@@ -11,7 +15,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -23,7 +26,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class SendMailFragmentDialog extends DialogFragment{
+public class UploadToServer extends DialogFragment{
 	 private View vi;
 	 Toast toast;
 	 @Override   
@@ -34,10 +37,10 @@ public class SendMailFragmentDialog extends DialogFragment{
 	
 	 @Override  
 	 public Dialog onCreateDialog(Bundle savedInstanceState) { 
-		 vi = getActivity().getLayoutInflater().inflate(R.layout.fragment_send_mail, null); 
+		 vi = getActivity().getLayoutInflater().inflate(R.layout.fragment_upload, null); 
 		 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		 builder.setView(vi);
-		 builder.setTitle("Enviar Por Mail");
+		 builder.setTitle("Cargar en Servidor");
 		 builder.setPositiveButton(android.R.string.ok, 
 				 new DialogInterface.OnClickListener() {
 				 	@Override
@@ -86,52 +89,30 @@ public class SendMailFragmentDialog extends DialogFragment{
 	                 });
 	     }
 	 }
+	String upLoadServerUri = null;
+	int serverResponseCode = 0;
+	final String uploadFilePath = "/mnt/sdcard/";
+	final String uploadFileName = "registros_de_rutas.txt";
 		private boolean sendMail(View v){
 			 //La primera vez que el usuario ingresa, se debe verificar, que el promedio deseado
 			//sea alcanzable
 			//Estudiante
 			 boolean go = true;
 
-		   	 EditText edit = (EditText)v.findViewById(R.id.editTextDe);
+		   	 EditText edit = (EditText)v.findViewById(R.id.editTextUrl);
 		   	 String nombre = edit.getText().toString();
 		   	 if(nombre == ""){
-		   		 edit.setError("Olvidaste colocar tu mail");
+		   		 edit.setError("Olvidaste la url");
 		   		 go =false;
 		   	 }
-		   	 edit = (EditText)v.findViewById(R.id.editTextDestino);
-		   	 String destino = edit.getText().toString();
-		   	 if(destino == ""){
-		   		 edit.setError("Olvidaste colocar el mail");
-		   		 go =false;
-		   	 }
+
 		   	 
 		   	 if(go){
 			   	//enviar
-		   		 String[] TO = {destino};
-		         String[] CC = {nombre};
-		         Intent emailIntent = new Intent(Intent.ACTION_SEND);
-		         emailIntent.setData(Uri.parse("mailto:"));
-		         emailIntent.setType("text/plain");
-		         
-		         String mensaje = args.getString("msg");
-
-		         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-		         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-		         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Track");
-		         emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-
-		         try {
-		        	 File root = Environment.getExternalStorageDirectory();
-		        	 File file = new File(root, "registros_de_rutas.txt");
-		        	 Uri uri = Uri.fromFile(file);
-		        	 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-		            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-		            //finish();
-		            //Log.i("Finished sending email...", "");
-		         } catch (android.content.ActivityNotFoundException ex) {
-		          //  Toast.makeText(MainActivity.this, 
-		           // "There is no email client installed.", Toast.LENGTH_SHORT).show();
-		         }
+		   		 
+		   		
+		  
+		   		
 		   		 
 				}else{
 					go = false;
@@ -142,6 +123,5 @@ public class SendMailFragmentDialog extends DialogFragment{
 			
 			return go;
 		}
-	  
-	 
+	   
 }

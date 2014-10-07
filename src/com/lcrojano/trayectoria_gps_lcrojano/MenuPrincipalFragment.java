@@ -3,6 +3,11 @@ package com.lcrojano.trayectoria_gps_lcrojano;
 
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.example.trayectoria_gps_lcrojano.R;
 
 import android.app.AlertDialog;
@@ -56,7 +61,7 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 	private TextView textViewAltitude;
 	private TextView textViewSpeed;
 	private MenuPrincipalFragment listener = this;
-	private String posicion;
+	private String posicion = "";
 	private EditText editNombre;
 	private EditText editLugar;
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,6 +86,8 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 			public void onClick(View v) {	
 				//Abrir fragment semestre, y cargar los datos requeridos
 				if (mStarted == false) {
+					File file = new File("sdcard/" + "registros_de_rutas.txt");
+					boolean deleted = file.delete();
 					starCapturing();
 				} else {
 					Toast.makeText(getActivity(), "Stoped",
@@ -106,15 +113,31 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 		});
 		ImageButton button3 = (ImageButton) rootView.findViewById(R.id.imageButtonCargar);
 		button3.setOnClickListener(new OnClickListener() {
+			Bundle args;
 			@Override
 			public void onClick(View v) {
+				if(posicion != ""){
+					  //Dialog Fragment si es primera vez en la aplicacion
+			    	FragmentManager fm = getActivity().getSupportFragmentManager(); 
+			    	//toast = Toast.makeText(getActivity().getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT);
+			    	UploadToServer nAsig = new UploadToServer();   
+			    	args = new Bundle();
+			    	args.putString("msg", posicion);
+					nAsig.setArguments(args);
+			    	nAsig.show(fm, "upload"); 
+				}else{
+					Toast.makeText(getActivity(), "No hay datos aun intente mas tarde",
+							Toast.LENGTH_LONG).show();
+					
+				}
 			
 	
 				
 			}
 		});
+		
 		ImageButton button4 = (ImageButton) rootView.findViewById(R.id.imageButtonEnviar);
-		button3.setOnClickListener(new OnClickListener() {
+		button4.setOnClickListener(new OnClickListener() {
 	    Bundle args;
 
 			@Override
@@ -207,13 +230,26 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 		textViewSpeed.setText(String.valueOf(mSpeed));
 		String nombre = editNombre.getText().toString();
 		String lugar = editLugar.getText().toString();
-		posicion = "Longitud: " + mLong + 
-				"\n Latitud: " + mLat + 
-				"\n Altitud: " + mAlt + 
-				"\n Velocidad: " + mSpeed +
-				"\n Nombre: " + nombre + 
-				"\n Lugar: " + lugar;
 		
+		posicion = posicion +
+			    mLong + 
+				"," + mLat + 
+				"," + mAlt + 
+				"," + mSpeed +
+				"," + nombre + 
+				"," + lugar + "\n";
+		
+		String pos2 = 
+			    mLong + 
+				"," + mLat + 
+				"," + mAlt + 
+				"," + mSpeed +
+				"," + nombre + 
+				"," + lugar;
+		addTextToFile(pos2+"\n");
+		//txt
+		
+				
 				
 	}
 	
@@ -234,7 +270,32 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 			
 		}
 	}
-
+	public void addTextToFile(String text) {
+        File logFile = new File("sdcard/" + "registros_de_rutas.txt");
+        if (!logFile.exists()) {
+            try {
+                logFile.createNewFile();
+                try {
+                    BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+                    buf.append("Longitud,Latitud,Altitud,Velocidad,Nombre,Lugar\n");
+                    buf.newLine();
+                    buf.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	@Override
 	public void onProviderDisabled(String arg0) {
 		// TODO Auto-generated method stub
