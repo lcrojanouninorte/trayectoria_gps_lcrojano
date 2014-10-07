@@ -1,8 +1,6 @@
 package com.lcrojano.trayectoria_gps_lcrojano;
 
-import com.example.promapp.DatabaseHelper;
-import com.example.promapp.MenuPrincipalFragment;
-import com.example.promapp.SimulatorHelper;
+
 import com.example.trayectoria_gps_lcrojano.R;
 
 import android.support.v4.app.FragmentManager;
@@ -17,6 +15,7 @@ import android.view.MenuItem;
 public class MainActivity extends ActionBarActivity {
 
     private SharedPreferences prefs;
+	private MenuPrincipalFragment menuPrincipal;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,4 +50,6 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    
 }

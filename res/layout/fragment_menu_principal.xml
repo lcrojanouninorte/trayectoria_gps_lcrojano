@@ -1,14 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bgrepeat"
-    android:orientation="vertical" >
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:background="@drawable/ribbon_3"
+        android:layout_gravity="center"
+        android:gravity="center" >
+
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+			android:paddingLeft="10dp"
+		    android:text="Registro de Trayectorias"
+		    android:textAppearance="?android:attr/textAppearanceLarge"
+		    android:textColor="@android:color/white"
+		     />
+
+	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="0.71"
+           android:background="@color/white"
+           android:orientation="vertical" >
+		
+        		<LinearLayout
+        android:id="@+id/layoutNombre"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="horizontal"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="NOMBRE" 
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <EditText
+            android:id="@+id/editTextNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </EditText>
+
+    </LinearLayout>
+		<LinearLayout
+        android:id="@+id/layoutLugar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/textViewLugar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LUGAR" 
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <EditText
+            android:id="@+id/editTextLugar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
     </LinearLayout>
 
-</LinearLayout>
+		<TableLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+		    android:layout_weight="0"
+		    android:background="@color/white"
+           
+         >
+
+		    <TableRow
+		        android:id="@+id/tableRow1"
+		        android:layout_width="match_parent"
+		        android:layout_margin="5dp"
+		        android:layout_weight="1"
+		        android:gravity="center" 
+		        android:padding="12dip"
+		        android:layout_height="wrap_content" >
+
+		        <TextView
+		            android:id="@+id/textView10"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Longitud" />
+
+		        <TextView
+		            android:id="@+id/textView11"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Altitud" />
+
+		        <TextView
+		            android:id="@+id/textView12"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Velocidad" />
+
+		        <TextView
+		            android:id="@+id/textView14"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="Latitud" />
+
+		    </TableRow>
+
+		    <TableRow
+		        android:id="@+id/tableRow2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content" >
+
+   <TextView
+       android:id="@+id/textViewLongitud"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_weight="1"
+       android:text="-" />
+
+		        <TextView
+		            android:id="@+id/textViewAltitud"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="-" />
+
+		        <TextView
+		            android:id="@+id/textViewVelocidad"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="-" />
+
+		        <TextView
+		            android:id="@+id/textViewLatitud"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="-" />
+		        
+		    </TableRow>
+
+		   
+		</TableLayout>
+            
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.19"
+        android:background="#99CCBBBC"
+        android:orientation="horizontal" >
+		<ImageButton
+	            android:id="@+id/imageButtonIniciar" 
+	            android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside" 
+	            android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+	            android:background="@drawable/start" />
+		<ImageButton
+	            android:id="@+id/imageButtonParar"
+	            android:layout_width="0dp"
+	            android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside" 
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.5"
+	            android:background="@drawable/stop_2" />
+		 <ImageButton
+	            android:id="@+id/imageButtonCargar"
+	            android:layout_width="0dp"
+	            android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside" 
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.5"
+	            android:background="@drawable/upload_2" />
+		  <ImageButton
+	            android:id="@+id/imageButtonEnviar"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.5"
+	            android:background="@drawable/send" />
+
+    </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/white"
+          android:layout_margin="0dp"
+          android:orientation="horizontal"
+          android:padding="0dp" >
+	        
+	        <TextView
+	            android:id="@+id/textViewIniciar"
+	            android:layout_weight="0.5"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            
+	            android:gravity="center"
+	            android:text="Iniciar" />
+	        <TextView
+	            android:id="@+id/textViewParar"
+	             android:layout_weight="0.5"
+	            android:layout_width="0dp"
+	             android:gravity="center"
+	            android:layout_height="wrap_content"          
+	            android:text="Parar" />
+	        <TextView
+	            android:id="@+id/textViewCargar"
+	             android:layout_weight="0.5"
+	            android:layout_width="0dp"
+	             android:gravity="center"
+	            android:layout_height="wrap_content" 
+	            android:text="Cargar" />
+	        <TextView
+	            android:id="@+id/textViewEnviar"
+	             android:layout_weight="0.5"
+	            android:layout_width="0dp"
+	             android:gravity="center"
+	            android:layout_height="wrap_content"
+	            android:text="Enviar" />
+	        
+	     </LinearLayout>
+    
+    </LinearLayout>
+    
+

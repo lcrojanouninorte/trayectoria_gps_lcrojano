@@ -4,5 +4,5 @@
     <string name="app_name">trayectoria_gps_lcrojano</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+     <color name="white">#99FFFFFF</color>  
 </resources>
