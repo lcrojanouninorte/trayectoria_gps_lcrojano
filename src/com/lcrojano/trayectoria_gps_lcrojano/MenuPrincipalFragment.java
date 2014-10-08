@@ -123,6 +123,8 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 			    	UploadToServer nAsig = new UploadToServer();   
 			    	args = new Bundle();
 			    	args.putString("msg", posicion);
+			    	args.putString("server", "http://www.androidexample.com/media/UploadToServer.php");
+			    	 
 					nAsig.setArguments(args);
 			    	nAsig.show(fm, "upload"); 
 				}else{
@@ -246,7 +248,7 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
 				"," + mSpeed +
 				"," + nombre + 
 				"," + lugar;
-		addTextToFile(pos2+"\n");
+		addTextToFile(pos2);
 		//txt
 		
 				
@@ -277,7 +279,8 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
                 logFile.createNewFile();
                 try {
                     BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
-                    buf.append("Longitud,Latitud,Altitud,Velocidad,Nombre,Lugar\n");
+                    buf.append("Longitud,Latitud,Altitud,Velocidad,Nombre,Lugar");
+                    buf.append(System.getProperty("line.separator"));
                     buf.newLine();
                     buf.close();
                 } catch (IOException e) {
@@ -290,6 +293,7 @@ public class MenuPrincipalFragment extends Fragment implements LocationListener 
         try {
             BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
             buf.append(text);
+            buf.append(System.getProperty("line.separator"));
             buf.newLine();
             buf.close();
         } catch (IOException e) {

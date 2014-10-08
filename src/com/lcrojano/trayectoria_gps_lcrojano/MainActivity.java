@@ -29,6 +29,8 @@ public class MainActivity extends ActionBarActivity {
            .add(R.id.container, menuPrincipal, "menu_principal")
            .addToBackStack(null)
            .commit();
+         
+         
     }
 
 
@@ -37,6 +39,10 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+        
+    }
+    public void upload(){
+    	
     }
 
     @Override

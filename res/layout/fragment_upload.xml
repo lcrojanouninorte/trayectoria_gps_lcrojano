@@ -36,7 +36,8 @@
 	            android:layout_height="wrap_content"
 	            android:ems="10"
 	            android:hint="Url"
-	            android:inputType="textWebEmailAddress" >
+	            android:inputType="textWebEmailAddress"
+	            android:text="http://www.androidexample.com/media/UploadToServer.php" >
 	   
 	            <requestFocus />
 	        </EditText>
